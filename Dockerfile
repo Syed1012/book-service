@@ -1,5 +1,5 @@
 #official java runtime
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 
 #Working directory inside the container
 WORKDIR /app
