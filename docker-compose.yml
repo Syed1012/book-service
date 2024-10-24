@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  book-service:
+    image: openjdk:17-jdk-slim
+    container_name: book-service
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://admin:admin@cluster0.fwfds.mongodb.net/book_service
+      - SPRING_DATA_MONGODB_DATABASE=book_service
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target:/app
+    working_dir: /app
+    command: ["java", "-jar", "book-service-0.0.1-SNAPSHOT.jar"]
+    depends_on:
+      - mongodb
+    networks:
+      - book-service-network
+
+  mongodb:
+    image: mongo:5.0
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    networks:
+      - book-service-network
+
+networks:
+  book-service-network:
+    driver: bridge
