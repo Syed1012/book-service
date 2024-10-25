@@ -36,36 +36,36 @@ jobs:
     - name: Run unit tests
       run: ./mvnw test
     
-    - name: Deploy to Kubernetes
-      run: |
-        echo "${{ secrets.KUBE_CA_CERT }}" | base64 --decode > ./ca.crt
-        echo "${{ secrets.KUBE_CLIENT_CERT }}" | base64 --decode > ./client.crt
-        echo "${{ secrets.KUBE_CLIENT_KEY }}" | base64 --decode > ./client.key
-        export KUBECONFIG=./kubeconfig
-        cat << EOF > $KUBECONFIG
-        apiVersion: v1
-        clusters:
-        - cluster:
-            certificate-authority: ./ca.crt
-            server: https://127.0.0.1:8443
-          name: minikube
-        contexts:
-        - context:
-            cluster: minikube
-            user: minikube
-          name: minikube
-        current-context: minikube
-        kind: Config
-        preferences: {}
-        users:
-        - name: minikube
-          user:
-            client-certificate: ./client.crt
-            client-key: ./client.key
-        EOF
+    # - name: Deploy to Kubernetes
+    #   run: |
+    #     echo "${{ secrets.KUBE_CA_CERT }}" | base64 --decode > ./ca.crt
+    #     echo "${{ secrets.KUBE_CLIENT_CERT }}" | base64 --decode > ./client.crt
+    #     echo "${{ secrets.KUBE_CLIENT_KEY }}" | base64 --decode > ./client.key
+    #     export KUBECONFIG=./kubeconfig
+    #     cat << EOF > $KUBECONFIG
+    #     apiVersion: v1
+    #     clusters:
+    #     - cluster:
+    #         certificate-authority: ./ca.crt
+    #         server: https://127.0.0.1:8443
+    #       name: minikube
+    #     contexts:
+    #     - context:
+    #         cluster: minikube
+    #         user: minikube
+    #       name: minikube
+    #     current-context: minikube
+    #     kind: Config
+    #     preferences: {}
+    #     users:
+    #     - name: minikube
+    #       user:
+    #         client-certificate: ./client.crt
+    #         client-key: ./client.key
+    #     EOF
         
-        kubectl apply -f k8s/mongodb-secret.yaml
-        kubectl apply -f k8s/mongodb-deployment.yaml
-        kubectl apply -f k8s/mongodb-service.yaml
-        kubectl apply -f k8s/book-service-deployment.yaml
-        kubectl apply -f k8s/book-service-service.yaml
+    #     kubectl apply -f k8s/mongodb-secret.yaml
+    #     kubectl apply -f k8s/mongodb-deployment.yaml
+    #     kubectl apply -f k8s/mongodb-service.yaml
+    #     kubectl apply -f k8s/book-service-deployment.yaml
+    #     kubectl apply -f k8s/book-service-service.yaml
