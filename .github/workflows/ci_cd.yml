@@ -38,10 +38,14 @@ jobs:
     
     - name: Deploy to Kubernetes
       run: |
-        echo base64 --decode > ./kubeconfig
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ./kubeconfig
         export KUBECONFIG=./kubeconfig
         kubectl apply -f k8s/mongodb-secret.yaml
         kubectl apply -f k8s/mongodb-deployment.yaml
         kubectl apply -f k8s/mongodb-service.yaml
         kubectl apply -f k8s/book-service-deployment.yaml
         kubectl apply -f k8s/book-service-service.yaml
+    
+      
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
