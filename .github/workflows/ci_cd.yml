@@ -45,7 +45,3 @@ jobs:
         kubectl apply -f k8s/mongodb-service.yaml
         kubectl apply -f k8s/book-service-deployment.yaml
         kubectl apply -f k8s/book-service-service.yaml
-    
-      
-      env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
