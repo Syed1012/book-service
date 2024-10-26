@@ -11,4 +11,4 @@ COPY target/book-service-0.0.1-SNAPSHOT.jar /app/book-service-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
 
 #Command to run the jar file
-ENTRYPOINT ["java", "-jar", "/app/book_service.jar"]
+ENTRYPOINT ["java", "-jar", "/app/book-service-0.0.1-SNAPSHOT.jar"]
