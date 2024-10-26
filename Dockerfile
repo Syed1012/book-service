@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 #Copy of maven built spring boot jar to the container
-COPY target/book-service-0.0.1-SNAPSHOT.jar /app/book-service.jar
+COPY target/book-service-0.0.1-SNAPSHOT.jar /app/book-service-0.0.1-SNAPSHOT.jar
 
 #Application port
 EXPOSE 8080

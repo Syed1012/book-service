@@ -1,0 +1,25 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: book-service-cluster
+  region: ap-southeast-2
+
+nodeGroups:
+  - name: ng-1
+    instanceType: t3.small    # Free tier eligible
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    ssh:
+      allow: false           # Disable SSH access for security
+
+# Use managed node groups
+managedNodeGroups:
+  - name: managed-ng-1
+    instanceType: t3.small
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 2
+    ssh:
+      allow: false
