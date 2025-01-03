@@ -12,7 +12,7 @@
 	<artifactId>book-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book-service</name>
-	<description>Book Service REST API</description>
+	<description>Library Management System</description>
 	<url/>
 	<licenses>
 		<license/>
