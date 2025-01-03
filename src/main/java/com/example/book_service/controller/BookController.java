@@ -75,5 +75,4 @@ public class BookController {
     public ResponseEntity<List<Book>> getBooksByYear(@PathVariable int year) {
         return ResponseEntity.ok(bookService.findBooksByYear(year));
     }
-
 }
